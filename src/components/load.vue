@@ -27,25 +27,7 @@
           <p>服务类型</p>
           <p>{{form.type}}</p>
         </li>
-        <!-- <li>
-          <p>
-            <span>当前驾照签发城市</span>
-            <img src="../assets/wen.jpg" @click="choosClick">
-          </p>
-          <CityPicker/>
-        </li>
-        <li>
-          <p>
-            <span>可补换的签发城市</span>
-            <img src="../assets/wen.jpg" @click="canChange">
-          </p>
-          <p>选择补换地</p>
-        </li>-->
         <CityPicker/>
-        <li>
-          <p>服务费</p>
-          <p class="allmoney">￥399</p>
-        </li>
         <li class="sale">
           <p>优惠</p>
           <p>
@@ -56,7 +38,7 @@
       </ol>
       <div class="ques">
         <p></p>
-        <p>常见问题</p>
+        <router-link to='/question'><p>常见问题</p></router-link>
         <img src="../assets/person.jpg" alt="">
       </div>
       <div class="money">

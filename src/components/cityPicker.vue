@@ -14,6 +14,10 @@
       </p>
       <p>{{cost.join(' ')}}</p>
     </li>
+    <li>
+      <p>服务费</p>
+      <p class="allmoney">￥399</p>
+    </li>
     <div class="current">
       <van-popup v-model="choos" overlay close-on-click-overlay>
         <img class="img" src="../assets/licence.png">
@@ -65,7 +69,6 @@ export default {
       //驾照
       showCity: false,
       //可补换
-      // showCost:false
       columns: [],
       columnsCost: []
     };
@@ -107,14 +110,12 @@ export default {
       this.cancelType();
     },
 
-
     confirmCost(values) {
-      this.updateState({cost:values});
-      console.log('values',values)
+      this.updateState({ cost: values });
+      console.log("values", values);
 
       this.cancelCost();
     },
-
 
     cancelType() {
       this.showCity = false;

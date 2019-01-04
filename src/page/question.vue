@@ -1,12 +1,6 @@
 <template>
   <div class="question">
-    <div class="title">
-      <div>
-        <img src="./img/zuo.jpg" alt="">
-      </div>
-      <p>补换驾照常见问题</p>
-      <img src="./img/duo.jpg" alt="">
-    </div>
+    
     <p style="text-align:center;margin-bottom: 10px">
       <span style="font-size:32px">补换驾照常见问题</span>
     </p>
@@ -93,6 +87,5 @@ export default {
 };
 </script>
 
-<style scoped>
- 
+<style>
 </style>

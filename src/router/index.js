@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter) 
 
 import Index from '../page/index'
+import Question from '../page/question'
 
 const router = new VueRouter({
     routes: [{
@@ -11,6 +12,9 @@ const router = new VueRouter({
     }, {
       path: '*',
       redirect: '/index'
+    },{
+      path: '/question',
+      component: Question
     }]
   })
   
