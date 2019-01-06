@@ -1,41 +1,195 @@
-@charset "utf-8";
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td { margin: 0; padding: 0;  font-family: "微软雅黑"; }
-fieldset, img { border: 0; }
-ul, ol, li { list-style: none; font-family:'Microsoft YaHei'; }
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+input {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: 0;
+    font-family: STHeitiSC-Light;
+    font: inherit;
+    vertical-align: baseline;
+}
 
-/* remember to define focus styles! */
-:focus { outline: 0; }
-address, caption, cite, code, dfn, em, strong, th, var, optgroup { font-style: normal; font-weight: normal; }
-h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal; }
-abbr, acronym { border: 0; font-variant: normal; }
-input, button, textarea, select, optgroup, option { font-family: inherit; font-size: inherit; font-style: inherit; font-weight: inherit; background-color: #fff; border: none;}
-code, kbd, samp, tt { font-size: 100%; }
-a{text-decoration:none;}
-a:hover{
+html,
+body,
+form,
+fieldset,
+p,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    -webkit-text-size-adjust: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    font-family: arial, sans-serif;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+ins,
+a {
     text-decoration: none;
 }
-/*@purpose To enable resizing for IE */
-/*@branch For IE6-Win, IE7-Win */
-input, button, textarea{ *font-size: 100%;}
-ol, ul { list-style: none; }
 
-/* tables still need 'cellspacing="0"' in the markup */
-table,tr,td { border-collapse: collapse; border-spacing: 0; margin:0;padding:0;}
-caption, th { text-align: left; }
-sup, sub { font-size: 100%; vertical-align: baseline; }
+del {
+    text-decoration: line-through;
+}
 
-/* remember to highlight anchors and inserts somehow! */
-blockquote, q { quotes: none; }
-blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
 
-/**Common Css**/
-.fr { float: right; *display: inline;}
-.fl { float: left; *display: inline;}
-/*文本超出显示省略号*/
-.ehn, .otw, .tow { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
-/*清除浮动*/
-.clearfix { clear: both; *zoom:1;}
-.clearfix:after { display: block; clear: both; content: "\0020"; visibility: hidden; height: 0; }
-html,body{
-    height: 100%;
+img {
+    display: inline-block;
+}
+
+input,
+textarea {
+    border: none;
+    background: none;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+    -ms-tap-highlight-color: rgba(0, 0, 0, 0);
+    -o-tap-highlight-color: rgba(0, 0, 0, 0);
+    // tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+$browser-default-font-size: 37.5px !default;
+
+/*html {
+    font-size: $browser-default-font-size;
+}*/
+
+@function pxTorem($px) {
+    //$px为需要转换的字号
+    @return $px / $browser-default-font-size * 1rem;
+}
+
+// pxTorem(10);
+//SCSS
+html {
+    font-size: $browser-default-font-size;
 }
