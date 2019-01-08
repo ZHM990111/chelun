@@ -22,7 +22,7 @@
             <img src="../assets/red.png" @click="redChange">
         </div>
         <Custom/>
-        <button class="sure">确认</button>
+        <!-- <button class="sure">确认</button> -->
         <div id="address-model" v-model="showAddress">
             <van-popup v-model="showAddress" position="bottom">
                 <van-picker

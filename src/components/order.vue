@@ -28,14 +28,14 @@
             <router-link to="/question">
                 <p>常见问题</p>
             </router-link>
-           <Custom/>
+            <Custom/>
         </div>
         <div class="money">
             <p>
                 实付：
                 <span class="allmoney">￥399</span>
             </p>
-            <button>立即支付</button>
+            <button @click="toPay">立即支付</button>
         </div>
         <div class="mark" v-show="showMask">
             <img :src="current.demo">
@@ -78,8 +78,8 @@ import { uploadImg } from "../api/index";
 import Current from "./current";
 import CityPicker from "./cityPicker";
 
-import {isVip, goPay} from '../api/index';
-import Custom from './custom'
+import { isVip, goPay } from "../api/index";
+import Custom from "./custom";
 
 export default {
   name: "Order",
@@ -100,12 +100,15 @@ export default {
       }
     };
   },
-//   beforeDestroyed(){
-//     Bus.$emit()
-//   },
-  methods: {  
-    change(tit){
-      console.log(tit)
+  //   beforeDestroyed(){
+  //     Bus.$emit()
+  //   },
+  methods: {
+    toPay() {
+        
+    },
+    change(tit) {
+      console.log(tit);
     },
     ...mapMutations({
       updateList: "upload/updateList"
@@ -153,5 +156,4 @@ export default {
 </script>
 
 <style>
-
 </style>
