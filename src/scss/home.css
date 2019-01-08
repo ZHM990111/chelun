@@ -458,3 +458,7 @@ html {
     width: 100%;
   }
 }
+
+#header {
+  display: block;
+}

@@ -101,12 +101,11 @@
 
 <script>
 import "../js/flexible.js";
-import "../scss/home.css";
-
 export default {
   name: "Home",
   data() {
     return {
+      header:true,
       attenData: [
         {
           top: 1,
@@ -172,6 +171,17 @@ export default {
     };
   },
   mounted() {
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (document.documentElement.scrollTop) {
+          this.header = false;
+        } else {
+          this.header= true;
+        }
+      },
+      false
+    );
     var echarts = require("echarts");
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById("main"));
@@ -288,5 +298,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+@import url("../scss/home.css");
 </style>

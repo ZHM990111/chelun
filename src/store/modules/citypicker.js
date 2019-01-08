@@ -3,8 +3,11 @@ const state = {
     //签发
     cityList: [],
     costList: [],
+    addressList: [],
     city: [],
-    cost: []
+    cost: [],
+    address: [],
+    addressSelectInd: 0
 }
 const mutations = {
     updateState(state, action) {
@@ -30,7 +33,12 @@ const actions = {
         let res = await costList(1, state.cityList[proIndex].id, state.cityList[proIndex].list[cityIndex].id);
         commit('updateState', { costList: res.data })
         console.log('res...', res);
-    }
+    },
+    async getAddressList({ commit }) {
+        let res = await cityList();
+        // console.log(res.data);
+        commit('updateState', { addressList: res.data })
+    },
 }
 
 export default {

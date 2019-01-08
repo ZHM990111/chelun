@@ -22,6 +22,18 @@ function sendRequest(url, method = 'GET', data = {}) {
     .then(body => body);
 }
 
+//唤醒分享
+export let goShare=()=>{
+  JSBridge.invoke('ui', 'shareMessage');
+}
+
+// 唤醒登陆
+export let goLogin = ()=>{
+  JSBridge.invoke('app', 'login', {
+    loginCallBackName: ()=>window.reload()
+  });
+}
+
 // 图片上传
 export let uploadImg = (type)=>{
   return new Promise((resolve, reject)=>{
@@ -43,5 +55,10 @@ export let cityList = ()=>{
 //可补换
 export let costList = (...params)=>{
   return sendRequest(`/api/ExchangeJiaZhao/getCostList?order_type=${params[0]}&province_id=${params[1]}&city_id=${params[2]}`)
+}
+
+// 获取用户是否是会员
+export let isVip = ()=>{
+  return sendRequest('https://vip.chelun.com/api/status')
 }
 

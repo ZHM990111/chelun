@@ -95,7 +95,6 @@ export default {
         1,
         this.cityList[index].list.map(item => item.name)
       );
-      console.log(picker, values);
     },
     changeCost(picker, values) {
       let index = this.costList.findIndex(item => item.name === values[0]);
@@ -113,7 +112,6 @@ export default {
     confirmCost(values) {
       this.updateState({ cost: values });
       console.log("values", values);
-
       this.cancelCost();
     },
 

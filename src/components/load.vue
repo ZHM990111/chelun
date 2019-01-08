@@ -1,163 +1,66 @@
 <template>
   <div id="app">
     <div class="title">
-      <img src="../assets/zuo.jpg" alt="">
+      <img src="../assets/zuo.jpg">
       <p>补换驾照</p>
-      <img src="../assets/duo.jpg" alt="">
+      <img src="../assets/duo.jpg">
     </div>
     <div class="count">
       <ul class="top">
-        <li class="first">订单提交</li>
-        <li>填写收货地址</li>
-        <li>正在办理</li>
-        <li>办理完成</li>
+        <li v-for="(item,index) in top" :key="index" @click="change(item.tit)">{{item.tit}}</li>
       </ul>
-      <img class="img" src="../assets/img.jpg" alt="">
-      <div class="card">
-        <dl v-for="(item,index) in list" :key="index" @click="show(item)">
-          <dt>
-            <img v-if="item.src" :src="item.src">
-            <img v-else :src="addImg">
-          </dt>
-          <dd>{{item.desc}}</dd>
-        </dl>
-      </div>
-      <ol class="list">
-        <li @click="typeClick">
-          <p>服务类型</p>
-          <p>{{form.type}}</p>
-        </li>
-        <CityPicker/>
-        <li class="sale">
-          <p>优惠</p>
-          <p>
-            登陆后查看优惠券
-            <img src="../assets/you.jpg" alt="">
-          </p>
-        </li>
-      </ol>
-      <div class="ques">
-        <p></p>
-        <router-link to='/question'><p>常见问题</p></router-link>
-        <img src="../assets/person.jpg" alt="">
-      </div>
-      <div class="money">
-        <p>
-          实付：
-          <span class="allmoney">￥399</span>
-        </p>
-        <button>立即支付</button>
-      </div>
-    </div>
-    <div class="mark" v-show="showMask">
-      <img :src="current.demo">
-      <div>
-        <button @click="upload(1)">拍照</button>
-        <button @click="upload(2)">相册</button>
-        <button @click="close">取消</button>
-      </div>
-    </div>
-    <div class="popup">
-      <van-popup v-model="showType" overlay position="bottom">
-        <van-picker
-          :columns="columns"
-          show-toolbar
-          title="服务类型"
-          @confirm="confirmType"
-          @cancel="cancelType"
-        />
-      </van-popup>
-    </div>
-
-    <div class="city">
-      <van-popup v-model="City" overlay>
-        <van-picker
-          :columns="columns"
-          show-toolbar
-          title="当前签发城市"
-          @confirm="confirmType"
-          @cancel="cancelType"
-        />
-      </van-popup>
+      <Ordere v-if="order"/>
+      <Goods v-if="goods"/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
-import jia from "../assets/jia.jpg";
-import { uploadImg } from "../api/index";
-
-import Current from "./current";
-import CityPicker from "./cityPicker";
-
-import axios from "axios";
+import Ordere from "./order";
+import Goods from "./goods";
 
 export default {
   name: "app",
   components: {
-    Current,
-    CityPicker
+    Ordere,
+    Goods
   },
   data() {
     return {
-      current: {},
-      showMask: false,
-      showType: false,
-      columns: ["换驾照", "补驾照"],
-      City: false,
-      form: {
-        type: ""
-      }
+      order: true,
+      goods: false,
+      top: [
+        {
+          tit: "订单提交",
+          flag: "true"
+        },
+        {
+          tit: "填写收货地址",
+          flag: false
+        },
+        {
+          tit: "正在办理",
+          flag: false
+        },
+        {
+          tit: "办理完成",
+          flag: false
+        }
+      ]
     };
   },
   methods: {
-    ...mapMutations({
-      updateList: "upload/updateList"
-    }),
-    show(item) {
-      console.log(item);
-      this.current = item;
-      this.showMask = true;
-    },
-    close() {
-      this.showMask = false;
-    },
-    typeClick() {
-      this.showType = true;
-    },
-    confirmType(value) {
-      this.form.type = value;
-      this.cancelType();
-    },
-    cancelType() {
-      this.showType = false;
-    },
-    ChoosCity() {
-      this.City = true;
-    },
-    async upload(type) {
-      let index = this.list.findIndex(item => item == this.current);
-      console.log(index);
-      this.updateList({
-        index,
-        src: res.data.url
-      });
-      this.showMask = false;
+    change(tit) {
+      // console.log(tit);
+      if (tit === "填写收货地址") {
+        this.goods = true;
+        this.order = false;
+      }
+      if (tit === "订单提交") {
+        this.goods = false;
+        this.order = true;
+      }
     }
-  },
-  computed: {
-    ...mapState({
-      list: state => state.Load.list
-    }),
-    addImg() {
-      return jia;
-    }
-  },
-  mounted() {
-    fetch(
-      "/api/ExchangeJiaZhao/getCostList?order_type=1&city_id=110100000000&province_id=110"
-    );
   }
 };
 </script>
@@ -179,15 +82,17 @@ html {
 .title {
   width: 100%;
   height: 44px;
+  line-height: 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
   font-weight: bold;
   border-bottom: 1px solid #ccc;
+  font-size: 30px;
   img {
-    width: 26px;
-    height: 26px;
+    width: 46px;
+    height: 46px;
   }
 }
 .count {
@@ -195,7 +100,7 @@ html {
   width: 100%;
   .top {
     width: 100%;
-    height: 40px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -204,7 +109,7 @@ html {
     li {
       color: rgb(63, 143, 209);
       text-align: center;
-      font-size: 14px;
+      font-size: 30px;
     }
     .first {
       color: #fff;
@@ -226,7 +131,7 @@ html {
       text-align: center;
       dt {
         img {
-          width: 60px;
+          width: 90px;
           height: auto;
         }
       }
@@ -234,6 +139,7 @@ html {
         width: 80%;
         text-align: center;
         margin-left: 10px;
+        font-size: 24px;
       }
     }
   }
@@ -243,12 +149,15 @@ html {
   list-style: none;
   border-top: 15px solid #eee;
   li {
-    height: 50px;
+    height: 100px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 50px;
     border-bottom: 1px solid #ccc;
     margin-left: -30px;
+    font-size: 30px;
   }
   img {
     width: 30px;
@@ -258,12 +167,14 @@ html {
 .ques {
   width: 100%;
   background: #eee;
-  height: 60px;
+  height: 140px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
   img {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
   }
 }
 .money {
@@ -276,15 +187,16 @@ html {
     margin-left: 10px;
   }
   button {
-    width: 80px;
+    width: 140px;
     height: 100%;
-    font-size: 16px;
+    font-size: 30px;
     border: 0;
     background: #ccc;
   }
 }
 .allmoney {
   color: red;
+  font-size: 28px;
 }
 
 .mark {
@@ -309,8 +221,8 @@ html {
     align-items: center;
     button {
       width: 100%;
-      height: 28px;
-      font-size: 18px;
+      height: 38px;
+      font-size: 30px;
       letter-spacing: 10px;
       border-radius: 8px;
       color: #3aafc0;
@@ -344,5 +256,8 @@ button:last-child {
   .img {
     width: 100%;
   }
+}
+.active {
+  background: blue;
 }
 </style>
