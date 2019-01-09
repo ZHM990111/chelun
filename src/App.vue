@@ -1,31 +1,33 @@
 <template>
   <!-- <button @click="login">点击登陆</button> -->
-  <router-view></router-view>
+  <keep-alive exclude="Index" include="custom">
+    <router-view></router-view>
+  </keep-alive>
 </template>
 
 <script>
-import JSBridge from './utils/JSBridge.js';
+import JSBridge from "./utils/JSBridge.js";
 export default {
-  name: 'app',
-  data () {
-    return {}
+  name: "app",
+  data() {
+    return {};
   },
   methods: {
-    login(){
-      JSBridge.invoke('app', 'login', {
-        loginCallBackName: (res)=>{
-          console.log('res...', res);
+    login() {
+      JSBridge.invoke("app", "login", {
+        loginCallBackName: res => {
+          console.log("res...", res);
         }
       });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-@import './scss/common.scss';
+@import "./scss/common.scss";
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
